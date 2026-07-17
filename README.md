@@ -1,3 +1,6 @@
+
+<img src="iconos_e_imagenes\iris-bloom-mark.svg" alt="Description" width="100" height="100">
+
 # Iris Bloom — Plataforma de Agentes de Análisis de Datos
 
 > **Organización:** Iris Startup Lab · Área de Innovación  
@@ -10,7 +13,7 @@
 
 Fernando Dorantes Nieto
 
-## 🌸 Visión del Proyecto
+## Visión del Proyecto
 
 **Iris Bloom** es una plataforma avanzada para el desarrollo y despliegue de **agentes conversacionales de análisis de datos**. Su objetivo es permitir a científicos de datos, analistas y usuarios de negocio interactuar mediante lenguaje natural para generar análisis automáticos y exportables en dos grandes vertientes:
 
