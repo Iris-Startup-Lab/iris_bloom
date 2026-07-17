@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;background:#0b1326;}
+    *{box-sizing:border-box;}
+    ::placeholder{color:#8c909f;}
+    textarea:focus,input:focus{outline:none;}
+    a{color:#adc6ff;}
+    a:hover{color:#dae2fd;}
+  </style>
+</helmet>
+
+<div style="min-height:100vh;font-family:Inter,sans-serif;color:#dae2fd;background:#0b1326;">
+
+<sc-if value="{{ isLanding }}" hint-placeholder-val="{{ true }}">
+<div>
+  <header style="display:flex;align-items:center;gap:24px;padding:18px 40px;border-bottom:1px solid #222a3d;position:sticky;top:0;background:rgba(11,19,38,0.88);backdrop-filter:blur(12px);z-index:10;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#3B82F6,#8B5CF6);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;">IB</div>
+      <span style="font-weight:700;font-size:16px;letter-spacing:-0.01em;">Iris Bloom</span>
+    </div>
+    <nav style="display:flex;align-items:center;gap:28px;margin-left:24px;">
+      <a href="#como-funciona" style="text-decoration:none;font-size:14px;color:#c2c6d6;">Cómo funciona</a>
+      <a href="#arquitectura" style="text-decoration:none;font-size:14px;color:#c2c6d6;">Arquitectura</a>
+    </nav>
+    <button onClick="{{ onOpenApp }}" style="margin-left:auto;background:#3B82F6;color:#fff;border:none;padding:10px 20px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">Abrir app</button>
+  </header>
+
+  <section style="padding:110px 40px 72px;max-width:1440px;margin:0 auto;text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:640px;height:640px;background:radial-gradient(circle,rgba(59,130,246,0.14),transparent 70%);pointer-events:none;"></div>
+    <div style="position:relative;">
+      <span style="display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#adc6ff;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.35);padding:7px 16px;border-radius:999px;text-transform:uppercase;">Agente de análisis de datos</span>
+      <h1 style="font-size:56px;font-weight:800;line-height:1.08;letter-spacing:-0.02em;margin:28px auto 20px;max-width:820px;">De un dataset a un tablero o notebook, en minutos.</h1>
+      <p style="font-size:18px;line-height:1.6;color:#c2c6d6;max-width:640px;margin:0 auto 36px;text-wrap:pretty;">Sube tus datos, describe lo que necesitas y el agente decide qué herramienta usar: genera un tablero de Tableau, un notebook de Colab ejecutado, o ambos — con MCP conectando cada paso.</p>
+      <div style="display:flex;gap:14px;justify-content:center;margin-bottom:56px;">
+        <button onClick="{{ onOpenApp }}" style="background:#3B82F6;color:#fff;border:none;padding:14px 26px;border-radius:4px;font-size:15px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">Abrir app</button>
+        <a href="#arquitectura" style="text-decoration:none;background:transparent;color:#dae2fd;border:1px solid #424754;padding:14px 26px;border-radius:4px;font-size:15px;font-weight:600;">Ver arquitectura</a>
+      </div>
+      <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
+        <div style="background:rgba(255,255,255,0.05);border:1px solid #222a3d;border-radius:8px;padding:18px 28px;min-width:170px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:#adc6ff;">2</div>
+          <div style="font-size:13px;color:#8c909f;margin-top:4px;">Motores: Tableau + Colab</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid #222a3d;border-radius:8px;padding:18px 28px;min-width:170px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:#adc6ff;">MCP</div>
+          <div style="font-size:13px;color:#8c909f;margin-top:4px;">Estándar abierto de herramientas</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid #222a3d;border-radius:8px;padding:18px 28px;min-width:170px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:#adc6ff;">100%</div>
+          <div style="font-size:13px;color:#8c909f;margin-top:4px;">Notebooks con ejecución real</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="como-funciona" style="padding:72px 40px;max-width:1200px;margin:0 auto;">
+    <h2 style="font-size:32px;font-weight:700;letter-spacing:-0.02em;margin:0 0 8px;">Cómo funciona</h2>
+    <p style="color:#8c909f;font-size:15px;margin:0 0 36px;">Tres pasos, un agente.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+      <div style="background:#171f33;border:1px solid #2d3449;border-radius:8px;padding:24px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#3B82F6;margin-bottom:12px;">01</div>
+        <h3 style="font-size:18px;font-weight:600;margin:0 0 8px;">Sube tu dataset</h3>
+        <p style="font-size:14px;color:#c2c6d6;line-height:1.5;margin:0;">El agente ejecuta un health scan real: dtypes, nulos, duplicados.</p>
+      </div>
+      <div style="background:#171f33;border:1px solid #2d3449;border-radius:8px;padding:24px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#8B5CF6;margin-bottom:12px;">02</div>
+        <h3 style="font-size:18px;font-weight:600;margin:0 0 8px;">Describe lo que necesitas</h3>
+        <p style="font-size:14px;color:#c2c6d6;line-height:1.5;margin:0;">En lenguaje natural: un tablero, un análisis, un modelo.</p>
+      </div>
+      <div style="background:#171f33;border:1px solid #2d3449;border-radius:8px;padding:24px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#4edea3;margin-bottom:12px;">03</div>
+        <h3 style="font-size:18px;font-weight:600;margin:0 0 8px;">Recibe el resultado</h3>
+        <p style="font-size:14px;color:#c2c6d6;line-height:1.5;margin:0;">Un tablero de Tableau, un notebook de Colab ejecutado, o HTML ligero.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="arquitectura" style="padding:72px 40px;max-width:1200px;margin:0 auto;">
+    <h2 style="font-size:32px;font-weight:700;letter-spacing:-0.02em;margin:0 0 8px;">Tres tracks, un núcleo</h2>
+    <p style="color:#8c909f;font-size:15px;margin:0 0 36px;max-width:640px;">Un cliente MCP y un agente con tool-use conectan tres capacidades independientes.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+      <div style="background:#171f33;border:1px solid #2d3449;border-top:2px solid #3B82F6;border-radius:8px;padding:24px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#3B82F6;text-transform:uppercase;">Descriptivo</span>
+        <h3 style="font-size:17px;font-weight:600;margin:10px 0 8px;">Tableau (cwtwb)</h3>
+        <p style="font-size:14px;color:#c2c6d6;line-height:1.5;margin:0;">El agente decide el spec de visualizaciones y genera un tablero .twb real, o un HTML ligero para prototipos.</p>
+      </div>
+      <div style="background:#171f33;border:1px solid #2d3449;border-top:2px solid #8B5CF6;border-radius:8px;padding:24px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#8B5CF6;text-transform:uppercase;">Inferencial</span>
+        <h3 style="font-size:17px;font-weight:600;margin:10px 0 8px;">Colab MCP</h3>
+        <p style="font-size:14px;color:#c2c6d6;line-height:1.5;margin:0;">Crea y ejecuta celdas reales — no plantillas estáticas — y lee los resultados de vuelta.</p>
+      </div>
+      <div style="background:#171f33;border:1px solid #2d3449;border-top:2px solid #4edea3;border-radius:8px;padding:24px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#4edea3;text-transform:uppercase;">Diseño</span>
+        <h3 style="font-size:17px;font-weight:600;margin:10px 0 8px;">Visión + tokens</h3>
+        <p style="font-size:14px;color:#c2c6d6;line-height:1.5;margin:0;">Un modelo de visión en ZeroGPU extrae tokens de diseño de tu maqueta para condicionar el estilo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:56px 40px;text-align:center;border-top:1px solid #222a3d;">
+    <h3 style="font-size:24px;font-weight:700;margin:0 0 20px;">Empieza con tu dataset</h3>
+    <button onClick="{{ onOpenApp }}" style="background:#3B82F6;color:#fff;border:none;padding:14px 28px;border-radius:4px;font-size:15px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">Abrir Data Center</button>
+  </section>
+
+  <footer style="padding:44px 40px 28px;border-top:1px solid #222a3d;">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <div style="width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,#3B82F6,#8B5CF6);"></div>
+          <span style="font-weight:700;font-size:14px;">Iris Bloom</span>
+        </div>
+        <p style="font-size:13px;color:#8c909f;line-height:1.5;margin:0;">Un proyecto de Iris Startup Lab · Área de Innovación.</p>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:#c2c6d6;margin-bottom:10px;">Motores</div>
+        <p style="font-size:13px;color:#8c909f;margin:0 0 6px;">Tableau / cwtwb</p>
+        <p style="font-size:13px;color:#8c909f;margin:0;">Colab MCP</p>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:#c2c6d6;margin-bottom:10px;">Recursos</div>
+        <p style="font-size:13px;color:#8c909f;margin:0 0 6px;">Documentación MCP</p>
+        <p style="font-size:13px;color:#8c909f;margin:0;">Plan de mejoras</p>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:#c2c6d6;margin-bottom:10px;">Estado</div>
+        <p style="font-size:13px;color:#8c909f;margin:0;">Prototipo de diseño — v0.1</p>
+      </div>
+    </div>
+  </footer>
+</div>
+</sc-if>
+
+<sc-if value="{{ isApp }}" hint-placeholder-val="{{ false }}">
+<div style="min-height:100vh;display:flex;">
+  <aside style="width:240px;flex-shrink:0;background:#0b1326;border-right:1px solid #222a3d;display:flex;flex-direction:column;padding:20px 14px;">
+    <div onClick="{{ onOpenLanding }}" style="display:flex;align-items:center;gap:10px;padding:8px 8px 22px;cursor:pointer;">
+      <div style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#3B82F6,#8B5CF6);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;color:#fff;">IB</div>
+      <span style="font-weight:700;font-size:15px;">Iris Bloom</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px;">
+      <button onClick="{{ onGoData }}" style="{{ dataNavStyle }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M12 3v12m0 0l-4-4m4 4l4-4"></path><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"></path></svg>
+        Data Center
+      </button>
+      <button onClick="{{ onGoTableros }}" style="{{ tablerosNavStyle }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 20V10M12 20V4M20 20v-7"></path></svg>
+        Tableros
+      </button>
+      <button onClick="{{ onGoNotebook }}" style="{{ notebookNavStyle }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="4" y="3" width="16" height="18" rx="2"></rect><path d="M8 8h8M8 12h8M8 16h5"></path></svg>
+        Notebook Lab
+      </button>
+    </div>
+    <div style="margin-top:auto;padding-top:16px;border-top:1px solid #222a3d;">
+      <button onClick="{{ onOpenLanding }}" style="display:flex;align-items:center;gap:8px;background:none;border:none;color:#8c909f;font-size:13px;cursor:pointer;padding:8px;font-family:Inter,sans-serif;">← Volver al sitio</button>
+    </div>
+  </aside>
+
+  <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+    <div style="height:64px;border-bottom:1px solid #222a3d;display:flex;align-items:center;justify-content:space-between;padding:0 32px;flex-shrink:0;">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8c909f;letter-spacing:0.06em;">IRIS BLOOM</div>
+        <sc-if value="{{ screenIsData }}" hint-placeholder-val="{{ true }}"><div style="font-size:16px;font-weight:600;">Data Center</div></sc-if>
+        <sc-if value="{{ screenIsTableros }}" hint-placeholder-val="{{ false }}"><div style="font-size:16px;font-weight:600;">Generador de tableros</div></sc-if>
+        <sc-if value="{{ screenIsNotebook }}" hint-placeholder-val="{{ false }}"><div style="font-size:16px;font-weight:600;">Notebook Lab</div></sc-if>
+      </div>
+      <sc-if value="{{ uploadDone }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:8px;background:#171f33;border:1px solid #2d3449;border-radius:999px;padding:6px 14px;">
+          <span style="width:7px;height:7px;border-radius:999px;background:#4edea3;box-shadow:0 0 0 3px rgba(78,222,163,0.15);"></span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#c2c6d6;">ventas_retail_2026.csv</span>
+        </div>
+      </sc-if>
+    </div>
+
+    <div style="flex:1;overflow:auto;padding:32px;">
+
+      <sc-if value="{{ screenIsData }}" hint-placeholder-val="{{ true }}">
+        <sc-if value="{{ uploadIdle }}" hint-placeholder-val="{{ true }}">
+          <div style="max-width:640px;margin:40px auto;border:1.5px dashed #424754;border-radius:8px;padding:56px 32px;text-align:center;background:#131b2e;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#adc6ff" stroke-width="1.6" width="36" height="36" style="margin:0 auto 16px;display:block;"><path d="M12 3v12m0 0l-4-4m4 4l4-4"></path><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"></path></svg>
+            <div style="font-size:16px;font-weight:600;margin-bottom:6px;">Arrastra tu archivo o haz click para cargar</div>
+            <div style="font-size:13px;color:#8c909f;margin-bottom:24px;">CSV, XLSX · máx. 200MB</div>
+            <button onClick="{{ onUpload }}" style="background:#3B82F6;color:#fff;border:none;padding:11px 22px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">Cargar dataset de ejemplo</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ uploadUploading }}" hint-placeholder-val="{{ false }}">
+          <div style="max-width:640px;margin:40px auto;border:1px solid #2d3449;border-radius:8px;padding:56px 32px;text-align:center;background:#131b2e;">
+            <div style="width:28px;height:28px;border:3px solid #2d3449;border-top-color:#3B82F6;border-radius:999px;margin:0 auto 18px;animation:spin 0.8s linear infinite;"></div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#c2c6d6;">Analizando ventas_retail_2026.csv…</div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ uploadDone }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:start;">
+            <div style="background:#171f33;border:1px solid #2d3449;border-radius:8px;padding:22px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <div>
+                  <div style="font-size:15px;font-weight:600;">ventas_retail_2026.csv</div>
+                  <div style="font-size:12px;color:#8c909f;margin-top:2px;">4,812 filas · 7 columnas · 640 KB</div>
+                </div>
+                <button onClick="{{ onResetUpload }}" style="background:none;border:1px solid #424754;color:#c2c6d6;padding:7px 14px;border-radius:4px;font-size:12px;cursor:pointer;font-family:Inter,sans-serif;">Cambiar dataset</button>
+              </div>
+              <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                <thead>
+                  <tr style="text-align:left;color:#8c909f;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.04em;">
+                    <th style="padding:8px 6px;border-bottom:1px solid #2d3449;">Columna</th>
+                    <th style="padding:8px 6px;border-bottom:1px solid #2d3449;">Tipo</th>
+                    <th style="padding:8px 6px;border-bottom:1px solid #2d3449;">Nulos</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <sc-for list="{{ columns }}" as="col" hint-placeholder-count="7">
+                    <tr>
+                      <td style="padding:9px 6px;border-bottom:1px solid #1b2338;font-family:'JetBrains Mono',monospace;color:#dae2fd;">{{ col.name }}</td>
+                      <td style="padding:9px 6px;border-bottom:1px solid #1b2338;"><span style="background:#222a3d;color:#adc6ff;font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 8px;border-radius:4px;">{{ col.dtype }}</span></td>
+                      <td style="padding:9px 6px;border-bottom:1px solid #1b2338;color:#8c909f;">{{ col.nulls }} ({{ col.pct }})</td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <div style="background:#171f33;border:1px solid #2d3449;border-radius:8px;padding:22px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8c909f;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;">Salud del dataset</div>
+                <div style="display:flex;align-items:baseline;gap:10px;">
+                  <span style="font-size:40px;font-weight:700;font-family:'JetBrains Mono',monospace;color:#4edea3;">87</span>
+                  <span style="font-size:14px;color:#8c909f;">/ 100</span>
+                </div>
+                <span style="display:inline-block;margin-top:10px;background:rgba(78,222,163,0.12);color:#4edea3;font-size:12px;padding:4px 10px;border-radius:999px;">Bueno</span>
+              </div>
+              <div style="background:#171f33;border:1px solid #2d3449;border-radius:8px;padding:22px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8c909f;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Hallazgos</div>
+                <sc-for list="{{ issues }}" as="issue" hint-placeholder-count="4">
+                  <div style="display:flex;gap:9px;align-items:flex-start;margin-bottom:11px;">
+                    <span style="{{ issue.dotStyle }}"></span>
+                    <span style="font-size:13px;color:#c2c6d6;line-height:1.4;">{{ issue.text }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:flex;gap:10px;">
+                <button onClick="{{ onGoTableros }}" style="flex:1;background:#3B82F6;color:#fff;border:none;padding:11px 14px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">Ir a Tableros</button>
+                <button onClick="{{ onGoNotebook }}" style="flex:1;background:none;border:1px solid #424754;color:#dae2fd;padding:11px 14px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">Ir a Notebook Lab</button>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+      </sc-if>
+
+      <sc-if value="{{ screenIsTableros }}" hint-placeholder-val="{{ false }}">
+        <div style="max-width:900px;">
+          <sc-if value="{{ tablerosIdle }}" hint-placeholder-val="{{ true }}">
+            <div style="background:#171f33;border:1px solid #2d3449;border-radius:8px;padding:24px;margin-bottom:20px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8c909f;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;">Describe el tablero que necesitas</div>
+              <textarea value="{{ tablerosPrompt }}" onChange="{{ onTablerosPromptChange }}" rows="3" style="width:100%;background:#0b1326;border:1px solid #2d3449;border-radius:4px;color:#dae2fd;font-size:14px;font-family:Inter,sans-serif;padding:12px;resize:vertical;"></textarea>
+              <div style="display:flex;align-items:center;gap:14px;margin-top:18px;">
+                <span style="font-size:13px;color:#8c909f;">Salida:</span>
+                <div style="display:flex;background:#0b1326;border:1px solid #2d3449;border-radius:999px;padding:3px;">
+                  <button onClick="{{ onSetOutputTableau }}" style="{{ outputTableauStyle }}">Tableau (.twb)</button>
+                  <button onClick="{{ onSetOutputHtml }}" style="{{ outputHtmlStyle }}">HTML ligero</button>
+                </div>
+                <button onClick="{{ onGenerateTableros }}" style="margin-left:auto;background:#3B82F6;color:#fff;border:none;padding:11px 22px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">Generar tablero</button>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ tablerosGenerating }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#0b1326;border:1px solid #2d3449;border-radius:8px;padding:22px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#4edea3;line-height:1.9;">
+              <div>&gt; Analizando esquema de ventas_retail_2026.csv…</div>
+              <div>&gt; Agente: seleccionando visualizaciones (ingreso × región, tendencia mensual, margen × producto)…</div>
+              <div>&gt; cwtwb: creando worksheets…</div>
+              <div style="color:#F59E0B;">&gt; Validando XML del workbook…</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ tablerosReview }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:20px;align-items:flex-start;">
+              <div style="flex:1;min-width:0;">
+                <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-bottom:18px;">
+                  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-width:0;">
+                    <sc-if value="{{ tablerosConfirmed }}" hint-placeholder-val="{{ false }}"><span style="flex-shrink:0;white-space:nowrap;background:rgba(78,222,163,0.12);color:#4edea3;font-size:12px;padding:5px 12px;border-radius:999px;">Validado</span></sc-if>
+                    <sc-if value="{{ tablerosNotConfirmed }}" hint-placeholder-val="{{ true }}"><span style="flex-shrink:0;white-space:nowrap;background:rgba(245,158,11,0.12);color:#F59E0B;font-size:12px;padding:5px 12px;border-radius:999px;">Vista previa · sin generar</span></sc-if>
+                    <span style="font-size:13px;color:#8c909f;">Tablero: Ventas retail — resumen ejecutivo</span>
+                  </div>
+                  <div style="display:flex;flex-wrap:wrap;gap:10px;flex-shrink:0;">
+                    <button onClick="{{ onResetTableros }}" style="white-space:nowrap;background:none;border:1px solid #424754;color:#c2c6d6;padding:9px 16px;border-radius:4px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif;">Generar otro</button>
+                    <sc-if value="{{ tablerosNotConfirmed }}" hint-placeholder-val="{{ true }}"><button onClick="{{ onConfirmTableros }}" style="white-space:nowrap;background:#3B82F6;color:#fff;border:none;padding:9px 16px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">Confirmar y generar .twb</button></sc-if>
+                    <sc-if value="{{ tablerosConfirmed }}" hint-placeholder-val="{{ false }}"><button style="white-space:nowrap;background:#3B82F6;color:#fff;border:none;padding:9px 16px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">Descargar .twb</button></sc-if>
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                  <div style="background:#171f33;border:1px solid #2d3449;border-radius:8px;padding:18px;grid-column:1/-1;">
+                    <div style="font-size:13px;font-weight:600;margin-bottom:14px;">Tendencia mensual de ingresos</div>
+                    <div style="display:flex;align-items:flex-end;gap:6px;height:100px;">
+                      <div style="flex:1;background:#3B82F6;border-radius:2px 2px 0 0;height:40%;"></div>
+                      <div style="flex:1;background:#3B82F6;border-radius:2px 2px 0 0;height:55%;"></div>
+                      <div style="flex:1;background:#3B82F6;border-radius:2px 2px 0 0;height:48%;"></div>
+                      <div style="flex:1;background:#3B82F6;border-radius:2px 2px 0 0;height:70%;"></div>
+                      <div style="flex:1;background:#3B82F6;border-radius:2px 2px 0 0;height:64%;"></div>
+                      <div style="flex:1;background:#3B82F6;border-radius:2px 2px 0 0;height:85%;"></div>
+                      <div style="flex:1;background:#3B82F6;border-radius:2px 2px 0 0;height:78%;"></div>
+                      <div style="flex:1;background:#3B82F6;border-radius:2px 2px 0 0;height:95%;"></div>
+                    </div>
+                  </div>
+                  <div style="background:#171f33;border:1px solid #2d3449;border-radius:8px;padding:18px;">
+                    <div style="font-size:13px;font-weight:600;margin-bottom:14px;">Ingresos por región</div>
+                    <div style="display:flex;flex-direction:column;gap:10px;">
+                      <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:#8c909f;width:64px;">Centro</span><div style="flex:1;background:#222a3d;border-radius:2px;height:10px;"><div style="width:82%;background:#8B5CF6;height:100%;border-radius:2px;"></div></div></div>
+                      <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:#8c909f;width:64px;">Norte</span><div style="flex:1;background:#222a3d;border-radius:2px;height:10px;"><div style="width:64%;background:#8B5CF6;height:100%;border-radius:2px;"></div></div></div>
+                      <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:#8c909f;width:64px;">Sur</span><div style="flex:1;background:#222a3d;border-radius:2px;height:10px;"><div style="width:47%;background:#8B5CF6;height:100%;border-radius:2px;"></div></div></div>
+                      <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:#8c909f;width:64px;">Occidente</span><div style="flex:1;background:#222a3d;border-radius:2px;height:10px;"><div style="width:39%;background:#8B5CF6;height:100%;border-radius:2px;"></div></div></div>
+                    </div>
+                  </div>
+                  <div style="background:#171f33;border:1px solid #2d3449;border-radius:8px;padding:18px;">
+                    <div style="font-size:13px;font-weight:600;margin-bottom:14px;">Margen por producto</div>
+                    <div style="display:flex;align-items:flex-end;gap:10px;height:100px;">
+                      <div style="flex:1;background:#4edea3;border-radius:2px 2px 0 0;height:88%;"></div>
+                      <div style="flex:1;background:#4edea3;border-radius:2px 2px 0 0;height:62%;"></div>
+                      <div style="flex:1;background:#4edea3;border-radius:2px 2px 0 0;height:74%;"></div>
+                      <div style="flex:1;background:#4edea3;border-radius:2px 2px 0 0;height:50%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="width:300px;flex-shrink:0;background:#131b2e;border:1px solid #2d3449;border-radius:8px;padding:16px;display:flex;flex-direction:column;height:520px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8c909f;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Refinar con el agente</div>
+                <div style="flex:1;overflow:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:12px;">
+                  <sc-for list="{{ tablerosChat }}" as="msg" hint-placeholder-count="1">
+                    <div style="{{ msg.bubbleStyle }}">{{ msg.text }}</div>
+                  </sc-for>
+                </div>
+                <textarea value="{{ tablerosChatInput }}" onChange="{{ onTablerosChatInputChange }}" rows="2" placeholder="Ej. cambia la gráfica de tendencia a línea…" style="width:100%;background:#0b1326;border:1px solid #2d3449;border-radius:4px;color:#dae2fd;font-size:13px;font-family:Inter,sans-serif;padding:9px;resize:none;margin-bottom:8px;"></textarea>
+                <button onClick="{{ onSendTablerosChat }}" style="background:#3B82F6;color:#fff;border:none;padding:9px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">Enviar ajuste</button>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ screenIsNotebook }}" hint-placeholder-val="{{ false }}">
+        <div style="max-width:900px;">
+          <sc-if value="{{ notebookIdle }}" hint-placeholder-val="{{ true }}">
+            <div style="background:#171f33;border:1px solid #2d3449;border-radius:8px;padding:24px;margin-bottom:20px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8c909f;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;">Describe el análisis que necesitas</div>
+              <textarea value="{{ notebookPrompt }}" onChange="{{ onNotebookPromptChange }}" rows="3" style="width:100%;background:#0b1326;border:1px solid #2d3449;border-radius:4px;color:#dae2fd;font-size:14px;font-family:Inter,sans-serif;padding:12px;resize:vertical;"></textarea>
+              <div style="display:flex;justify-content:flex-end;margin-top:18px;">
+                <button onClick="{{ onGenerateNotebook }}" style="background:#8B5CF6;color:#fff;border:none;padding:11px 22px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">Ejecutar en Colab</button>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ notebookGenerating }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#0b1326;border:1px solid #2d3449;border-radius:8px;padding:22px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#d0bcff;line-height:1.9;">
+              <div>&gt; Colab MCP: create_cell(markdown, "Regresión de margen")…</div>
+              <div>&gt; Colab MCP: create_cell(code)…</div>
+              <div>&gt; Colab MCP: execute_cell()…</div>
+              <div style="color:#F59E0B;">&gt; Colab MCP: get_cell_output()…</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ notebookReview }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:20px;align-items:flex-start;">
+              <div style="flex:1;min-width:0;">
+                <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-bottom:18px;">
+                  <sc-if value="{{ notebookConfirmed }}" hint-placeholder-val="{{ false }}"><span style="flex-shrink:0;white-space:nowrap;background:rgba(78,222,163,0.12);color:#4edea3;font-size:12px;padding:5px 12px;border-radius:999px;">Confirmado en Colab</span></sc-if>
+                  <sc-if value="{{ notebookNotConfirmed }}" hint-placeholder-val="{{ true }}"><span style="flex-shrink:0;white-space:nowrap;background:rgba(245,158,11,0.12);color:#F59E0B;font-size:12px;padding:5px 12px;border-radius:999px;">Vista previa · celdas ejecutadas localmente</span></sc-if>
+                  <div style="display:flex;flex-wrap:wrap;gap:10px;flex-shrink:0;">
+                    <button onClick="{{ onResetNotebook }}" style="white-space:nowrap;background:none;border:1px solid #424754;color:#c2c6d6;padding:9px 16px;border-radius:4px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif;">Generar otro</button>
+                    <sc-if value="{{ notebookNotConfirmed }}" hint-placeholder-val="{{ true }}"><button onClick="{{ onConfirmNotebook }}" style="white-space:nowrap;background:#8B5CF6;color:#fff;border:none;padding:9px 16px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">Confirmar en Colab</button></sc-if>
+                    <sc-if value="{{ notebookConfirmed }}" hint-placeholder-val="{{ false }}"><button style="white-space:nowrap;background:#8B5CF6;color:#fff;border:none;padding:9px 16px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">Abrir en Colab</button></sc-if>
+                  </div>
+                </div>
+                <div style="background:#131b2e;border:1px solid #2d3449;border-radius:8px;padding:20px;margin-bottom:14px;">
+                  <div style="font-size:15px;font-weight:700;margin-bottom:6px;">Regresión de margen por pedido</div>
+                  <p style="font-size:13px;color:#c2c6d6;line-height:1.6;margin:0;">Modelo lineal para predecir <code style="font-family:'JetBrains Mono',monospace;">margen</code> a partir de <code style="font-family:'JetBrains Mono',monospace;">unidades</code>, <code style="font-family:'JetBrains Mono',monospace;">costo</code> y <code style="font-family:'JetBrains Mono',monospace;">region</code>.</p>
+                </div>
+                <div style="background:#0b1326;border:1px solid #2d3449;border-radius:8px;padding:18px;margin-bottom:14px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;color:#dae2fd;overflow-x:auto;">
+<div style="color:#8c909f;">import statsmodels.formula.api as smf</div>
+<div>modelo = smf.ols('margen ~ unidades + costo + C(region)', data=df).fit()</div>
+<div>print(modelo.summary())</div>
+                </div>
+                <div style="background:#171f33;border:1px solid #2d3449;border-radius:8px;padding:20px;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8c909f;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Output</div>
+                  <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                    <thead>
+                      <tr style="text-align:left;color:#8c909f;font-family:'JetBrains Mono',monospace;font-size:11px;">
+                        <th style="padding:6px;border-bottom:1px solid #2d3449;">Variable</th>
+                        <th style="padding:6px;border-bottom:1px solid #2d3449;">Coef.</th>
+                        <th style="padding:6px;border-bottom:1px solid #2d3449;">p-valor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td style="padding:7px 6px;font-family:'JetBrains Mono',monospace;">unidades</td><td style="padding:7px 6px;font-family:'JetBrains Mono',monospace;">4.21</td><td style="padding:7px 6px;color:#4edea3;">0.001</td></tr>
+                      <tr><td style="padding:7px 6px;font-family:'JetBrains Mono',monospace;">costo</td><td style="padding:7px 6px;font-family:'JetBrains Mono',monospace;">-0.87</td><td style="padding:7px 6px;color:#4edea3;">0.000</td></tr>
+                      <tr><td style="padding:7px 6px;font-family:'JetBrains Mono',monospace;">R²</td><td style="padding:7px 6px;font-family:'JetBrains Mono',monospace;">0.68</td><td style="padding:7px 6px;color:#8c909f;">—</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div style="width:300px;flex-shrink:0;background:#131b2e;border:1px solid #2d3449;border-radius:8px;padding:16px;display:flex;flex-direction:column;height:520px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8c909f;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Refinar con el agente</div>
+                <div style="flex:1;overflow:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:12px;">
+                  <sc-for list="{{ notebookChat }}" as="msg" hint-placeholder-count="1">
+                    <div style="{{ msg.bubbleStyle }}">{{ msg.text }}</div>
+                  </sc-for>
+                </div>
+                <textarea value="{{ notebookChatInput }}" onChange="{{ onNotebookChatInputChange }}" rows="2" placeholder="Ej. agrega un gráfico de residuos…" style="width:100%;background:#0b1326;border:1px solid #2d3449;border-radius:4px;color:#dae2fd;font-size:13px;font-family:Inter,sans-serif;padding:9px;resize:none;margin-bottom:8px;"></textarea>
+                <button onClick="{{ onSendNotebookChat }}" style="background:#8B5CF6;color:#fff;border:none;padding:9px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">Enviar ajuste</button>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+    </div>
+  </div>
+</div>
+</sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const NAV_BASE = {
+  display: 'flex', alignItems: 'center', gap: '10px', width: '100%',
+  padding: '10px 12px', borderRadius: '6px', border: 'none', cursor: 'pointer',
+  fontSize: '14px', fontFamily: 'Inter,sans-serif', fontWeight: '500', textAlign: 'left'
+};
+const OUTPUT_BASE = {
+  border: 'none', padding: '8px 16px', borderRadius: '999px', fontSize: '13px',
+  fontWeight: '600', cursor: 'pointer', fontFamily: 'Inter,sans-serif'
+};
+const BUBBLE_BASE = { maxWidth: '92%', fontSize: '13px', lineHeight: '1.45', padding: '9px 12px', borderRadius: '8px' };
+
+class Component extends DCLogic {
+  state = {
+    view: 'landing',
+    appScreen: 'data-center',
+    uploadStage: 'idle',
+    tablerosPrompt: 'Dashboard de ventas: ingresos y margen por región y producto, con tendencia mensual.',
+    tablerosOutput: 'tableau',
+    tablerosStage: 'idle',
+    tablerosConfirmed: false,
+    tablerosChat: [],
+    tablerosChatInput: '',
+    notebookPrompt: 'Modelo de regresión para predecir el margen por pedido a partir de unidades, costo y región.',
+    notebookStage: 'idle',
+    notebookConfirmed: false,
+    notebookChat: [],
+    notebookChatInput: '',
+  };
+
+  navStyle(active) {
+    return active
+      ? { ...NAV_BASE, background: '#171f33', color: '#dae2fd' }
+      : { ...NAV_BASE, background: 'none', color: '#8c909f' };
+  }
+  outputStyle(active) {
+    return active
+      ? { ...OUTPUT_BASE, background: 'linear-gradient(135deg,#3B82F6,#8B5CF6)', color: '#fff' }
+      : { ...OUTPUT_BASE, background: 'none', color: '#8c909f' };
+  }
+  chatBubble(role, accent) {
+    return role === 'user'
+      ? { ...BUBBLE_BASE, alignSelf: 'flex-end', background: accent, color: '#fff' }
+      : { ...BUBBLE_BASE, alignSelf: 'flex-start', background: '#0b1326', border: '1px solid #2d3449', color: '#c2c6d6' };
+  }
+  sendChat(kind) {
+    const inputKey = kind + 'ChatInput', chatKey = kind + 'Chat';
+    const text = this.state[inputKey].trim();
+    if (!text) return;
+    const chat = this.state[chatKey].concat([{ role: 'user', text }]);
+    this.setState({ [chatKey]: chat, [inputKey]: '' });
+    setTimeout(() => {
+      const ack = kind === 'tableros'
+        ? 'Actualizando el tablero según tu instrucción — previsualización refrescada.'
+        : 'Ajustando el notebook — vuelvo a ejecutar las celdas afectadas.';
+      this.setState({ [chatKey]: this.state[chatKey].concat([{ role: 'agent', text: ack }]) });
+    }, 700);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const columns = [
+      { name: 'fecha', dtype: 'date', nulls: 0, pct: '0%' },
+      { name: 'region', dtype: 'string', nulls: 0, pct: '0%' },
+      { name: 'producto', dtype: 'string', nulls: 2, pct: '0.4%' },
+      { name: 'unidades', dtype: 'int64', nulls: 0, pct: '0%' },
+      { name: 'ingreso', dtype: 'float64', nulls: 0, pct: '0%' },
+      { name: 'costo', dtype: 'float64', nulls: 5, pct: '1.2%' },
+      { name: 'margen', dtype: 'float64', nulls: 0, pct: '0%' },
+    ];
+    const dotWarning = { width: '7px', height: '7px', borderRadius: '999px', background: '#F59E0B', marginTop: '5px', flexShrink: 0 };
+    const dotSuccess = { width: '7px', height: '7px', borderRadius: '999px', background: '#4edea3', marginTop: '5px', flexShrink: 0 };
+    const issues = [
+      { dotStyle: dotWarning, text: 'costo tiene 5 valores nulos (1.2%) — se recomienda imputar con la mediana.' },
+      { dotStyle: dotWarning, text: 'producto tiene 2 valores nulos (0.4%).' },
+      { dotStyle: dotSuccess, text: 'fecha detectada correctamente como tipo date (ISO 8601).' },
+      { dotStyle: dotSuccess, text: 'Sin filas duplicadas detectadas.' },
+    ];
+
+    return {
+      isLanding: s.view === 'landing',
+      isApp: s.view === 'app',
+      onOpenApp: () => this.setState({ view: 'app', appScreen: 'data-center' }),
+      onOpenLanding: () => this.setState({ view: 'landing' }),
+      onGoData: () => this.setState({ appScreen: 'data-center' }),
+      onGoTableros: () => this.setState({ appScreen: 'tableros' }),
+      onGoNotebook: () => this.setState({ appScreen: 'notebook' }),
+      screenIsData: s.appScreen === 'data-center',
+      screenIsTableros: s.appScreen === 'tableros',
+      screenIsNotebook: s.appScreen === 'notebook',
+      dataNavStyle: this.navStyle(s.appScreen === 'data-center'),
+      tablerosNavStyle: this.navStyle(s.appScreen === 'tableros'),
+      notebookNavStyle: this.navStyle(s.appScreen === 'notebook'),
+
+      uploadIdle: s.uploadStage === 'idle',
+      uploadUploading: s.uploadStage === 'uploading',
+      uploadDone: s.uploadStage === 'done',
+      onUpload: () => { this.setState({ uploadStage: 'uploading' }); setTimeout(() => this.setState({ uploadStage: 'done' }), 900); },
+      onResetUpload: () => this.setState({ uploadStage: 'idle' }),
+      columns, issues,
+
+      tablerosPrompt: s.tablerosPrompt,
+      onTablerosPromptChange: (e) => this.setState({ tablerosPrompt: e.target.value }),
+      outputTableauStyle: this.outputStyle(s.tablerosOutput === 'tableau'),
+      outputHtmlStyle: this.outputStyle(s.tablerosOutput === 'html'),
+      onSetOutputTableau: () => this.setState({ tablerosOutput: 'tableau' }),
+      onSetOutputHtml: () => this.setState({ tablerosOutput: 'html' }),
+      tablerosIdle: s.tablerosStage === 'idle',
+      tablerosGenerating: s.tablerosStage === 'generating',
+      tablerosReview: s.tablerosStage === 'review',
+      tablerosConfirmed: s.tablerosConfirmed,
+      tablerosNotConfirmed: !s.tablerosConfirmed,
+      onGenerateTableros: () => {
+        this.setState({ tablerosStage: 'generating' });
+        setTimeout(() => this.setState({
+          tablerosStage: 'review',
+          tablerosChat: [{ role: 'agent', text: 'Aquí tienes una primera previsualización del tablero. Pídeme ajustes antes de confirmar el archivo final.' }]
+        }), 1400);
+      },
+      onResetTableros: () => this.setState({ tablerosStage: 'idle', tablerosConfirmed: false, tablerosChat: [] }),
+      onConfirmTableros: () => this.setState({ tablerosConfirmed: true }),
+      tablerosChat: s.tablerosChat.map(m => ({ ...m, bubbleStyle: this.chatBubble(m.role, '#3B82F6') })),
+      tablerosChatInput: s.tablerosChatInput,
+      onTablerosChatInputChange: (e) => this.setState({ tablerosChatInput: e.target.value }),
+      onSendTablerosChat: () => this.sendChat('tableros'),
+
+      notebookPrompt: s.notebookPrompt,
+      onNotebookPromptChange: (e) => this.setState({ notebookPrompt: e.target.value }),
+      notebookIdle: s.notebookStage === 'idle',
+      notebookGenerating: s.notebookStage === 'generating',
+      notebookReview: s.notebookStage === 'review',
+      notebookConfirmed: s.notebookConfirmed,
+      notebookNotConfirmed: !s.notebookConfirmed,
+      onGenerateNotebook: () => {
+        this.setState({ notebookStage: 'generating' });
+        setTimeout(() => this.setState({
+          notebookStage: 'review',
+          notebookChat: [{ role: 'agent', text: 'Aquí tienes una previsualización del notebook con celdas ejecutadas. Pídeme ajustes antes de confirmarlo en Colab.' }]
+        }), 1600);
+      },
+      onResetNotebook: () => this.setState({ notebookStage: 'idle', notebookConfirmed: false, notebookChat: [] }),
+      onConfirmNotebook: () => this.setState({ notebookConfirmed: true }),
+      notebookChat: s.notebookChat.map(m => ({ ...m, bubbleStyle: this.chatBubble(m.role, '#8B5CF6') })),
+      notebookChatInput: s.notebookChatInput,
+      onNotebookChatInputChange: (e) => this.setState({ notebookChatInput: e.target.value }),
+      onSendNotebookChat: () => this.sendChat('notebook'),
+    };
+  }
+}
+</script>
+</body>
+</html>
